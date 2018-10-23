@@ -1,0 +1,66 @@
+<template>
+  <div class="header clearfix">
+    <el-breadcrumb separator-class="el-icon-arrow-right" class="fll" style="line-height: 50px">
+      <el-breadcrumb-item :to="{ path: '/layout' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+    </el-breadcrumb>
+    党建e家后台管理
+    <el-dropdown @command="handleCommand" class="flr" style="line-height: 50px; margin-top: 5px">
+    <img class="el-dropdown-link userImg" src="http://pbl.yaojunrong.com/icon_default.png"/>
+        <el-dropdown-menu slot="dropdown" style="margin-top: 10px">
+          <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+          <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    handleCommand (command) {
+      this.$message('click on item ' + command)
+      if (command === 'logout') {
+        this.$axios.get('/admin/adminUser/logout').then(res => {
+          if (res.data.code === 200) {
+            this.$message.success(res.data.msg)
+            setTimeout(() => {
+              this.$router.push('/login')
+            }, 1000)
+          } else {
+            this.$message.warning(res.data.msg)
+            setTimeout(() => {
+              this.$router.push('/login')
+            }, 1000)
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+      }
+    }
+  }
+}
+</script>
+
+<style scoped lang="scss">
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+  .header{
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .userImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+</style>
