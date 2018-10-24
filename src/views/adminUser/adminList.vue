@@ -11,40 +11,47 @@
           <el-table-column
             prop="username"
             header-align="center"
+            align="center"
             label="姓名">
           </el-table-column>
           <el-table-column
             prop="nickname"
             header-align="center"
+            align="center"
             label="昵称">
           </el-table-column>
           <el-table-column
             prop="idCard"
             label="身份证号"
             header-align="center"
+            align="center"
             width="180">
           </el-table-column>
           <el-table-column
             prop="age"
             header-align="center"
+            align="center"
             label="年龄">
           </el-table-column>
           <el-table-column
             prop="phone"
             label="手机号"
             header-align="center"
+            align="center"
             width="180">
           </el-table-column>
           <el-table-column
             label="头像"
             header-align="center"
+            align="center"
             width="100">
             <template slot-scope="scope">
-              <img style="width: 80px; height: 80px" :src="scope.row.header"/>
+              <img style="width: 80px; height: 80px; border-radius: 8px" :src="scope.row.header"/>
             </template>
           </el-table-column>
           <el-table-column
             header-align="center"
+            align="center"
             label="操作">
             <template slot-scope="scope">
               <el-button
@@ -65,7 +72,7 @@
           :current-page.sync="page"
           :page-sizes="[5, 10, 30]"
           layout="sizes,total, prev, pager, next"
-          :total="total">
+          :total="count">
         </el-pagination>
       </el-card>
     </div>
@@ -76,16 +83,17 @@ export default {
   data () {
     return {
       tableData: [],
-      total: 100,
+      count: 10,
       rows: 10,
       page: 1
     }
   },
   methods: {
     getDate () {
-      this.$axios.get(`/admin/adminUser/?page=${this.page}&rows=${this.rows}`).then(res => {
+      this.$axios.get(`/adminUser/?page=${this.page}&rows=${this.rows}`).then(res => {
         console.log(res)
         this.tableData = res.data.data
+        this.count = res.data.count
       })
     },
     handleSizeChange (val) {

@@ -31,7 +31,7 @@ export default {
     // 登录方法
     handleLogin () {
       console.log(this.formData)
-      this.$axios.post('/admin/adminUser/login', this.formData).then(res => {
+      this.$axios.post('/adminUser/login', this.formData).then(res => {
         if (res.data.code === 200) {
           this.$message.success(res.data.msg)
           setTimeout(() => {

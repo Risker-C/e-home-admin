@@ -131,7 +131,7 @@ export default {
     submitForm () {
       this.$refs['form'].validate((valid) => {
         if (valid) {
-          this.$axios.post('/admin/adminUser/add', this.formData).then(res => {
+          this.$axios.post('/adminUser/add', this.formData).then(res => {
             console.log(res)
             if (res.data.code === 200) {
               this.$message({

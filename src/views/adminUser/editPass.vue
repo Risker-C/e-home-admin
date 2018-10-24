@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     handleChange () {
-      this.$axios.put('/admin/adminUser/', {
+      this.$axios.put('/adminUser/', {
         password: this.formData.oldPassword,
         new_password: this.formData.newPassword
       }).then(res => {

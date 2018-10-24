@@ -13,8 +13,7 @@ const components = {
   addNews: () => import('@/views/news/addNews'),
   newsList: () => import('@/views/news/newsList'),
   addCategory: () => import('@/views/category/addCategory'),
-  categoryList: () => import('@/views/category/categoryList'),
-  updateCategory: () => import('@/views/category/updateCategory')
+  categoryList: () => import('@/views/category/categoryList')
 }
 
 export default new Router({
@@ -37,43 +36,75 @@ export default new Router({
         },
         {
           path: 'adminList',
+          mate: {
+            title: '管理员列表'
+          },
           name: 'adminList',
           component: components.adminList
         },
         {
           path: 'addAdmin',
+          mate: {
+            title: '添加管理员'
+          },
           name: 'addAdmin',
           component: components.addAdmin
         },
         {
           path: 'editPass',
+          mate: {
+            title: '修改密码'
+          },
           name: 'editPass',
           component: components.editPass
         },
         {
           path: 'addNews',
+          mate: {
+            title: '添加新闻'
+          },
           name: 'addNews',
           component: components.addNews
         },
         {
+          path: 'editNews/id=:id',
+          mate: {
+            title: '更新新闻'
+          },
+          name: 'editNews',
+          component: components.addNews
+        },
+        {
           path: 'newsList',
+          mate: {
+            title: '新闻列表'
+          },
           name: 'newsList',
           component: components.newsList
         },
         {
           path: 'addCategory',
+          mate: {
+            title: '添加分类'
+          },
           name: 'addCategory',
           component: components.addCategory
         },
         {
           path: 'categoryList',
+          mate: {
+            title: '分类列表'
+          },
           name: 'categoryList',
           component: components.categoryList
         },
         {
-          path: 'updateCategory',
+          path: 'updateCategory/id=:id',
+          mate: {
+            title: '更新分类'
+          },
           name: 'updateCategory',
-          component: components.updateCategory
+          component: components.addCategory
         }
       ]
     }

@@ -19,9 +19,9 @@
 export default {
   methods: {
     handleCommand (command) {
-      this.$message('click on item ' + command)
+      // this.$message('click on item ' + command)
       if (command === 'logout') {
-        this.$axios.get('/admin/adminUser/logout').then(res => {
+        this.$axios.get('/adminUser/logout').then(res => {
           if (res.data.code === 200) {
             this.$message.success(res.data.msg)
             setTimeout(() => {

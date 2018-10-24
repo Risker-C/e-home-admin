@@ -11,39 +11,45 @@
           <el-table-column
             prop="title"
             header-align="center"
+            align="center"
             label="新闻名">
           </el-table-column>
           <el-table-column
             prop="contentText"
             header-align="center"
+            align="center"
             label="新闻简介">
           </el-table-column>
           <el-table-column
             prop="author.nickname"
             label="作者"
+            align="center"
             header-align="center"
             width="180">
           </el-table-column>
           <el-table-column
             prop="category.title"
             header-align="center"
+            align="center"
             label="分类">
           </el-table-column>
           <el-table-column
             label="新闻头图"
+            align="center"
             header-align="center"
             width="100">
             <template slot-scope="scope">
-              <img style="width: 80px; height: 80px" :src="scope.row.header"/>
+              <img style="width: 80px; height: 80px; border-radius: 8px" :src="scope.row.header"/>
             </template>
           </el-table-column>
           <el-table-column
             header-align="center"
+            align="center"
             label="操作">
             <template slot-scope="scope">
               <el-button
                 size="mini"
-                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                @click="handleEdit(scope.row)">编辑</el-button>
               <el-button
                 size="mini"
                 type="danger"
@@ -59,7 +65,7 @@
           :current-page.sync="page"
           :page-sizes="[5, 10, 30]"
           layout="sizes,total, prev, pager, next"
-          :total="total">
+          :total="count">
         </el-pagination>
       </el-card>
     </div>
@@ -70,9 +76,9 @@ export default {
   data () {
     return {
       tableData: [],
-      total: 100,
       rows: 10,
-      page: 1
+      page: 1,
+      count: 10
     }
   },
   methods: {
@@ -80,6 +86,7 @@ export default {
       this.$axios.get(`/news/newsList/?page=${this.page}&rows=${this.rows}`).then(res => {
         console.log(res)
         this.tableData = res.data.data
+        this.count = res.data.count
       })
     },
     handleSizeChange (val) {
@@ -91,6 +98,9 @@ export default {
       console.log(`当前页: ${val}`)
       this.page = val
       this.getDate()
+    },
+    handleEdit (row) {
+      this.$router.push({name: 'editNews', params: {id: row._id}})
     }
   },
   created () {

@@ -6,28 +6,45 @@
         </div>
         <el-table
           :data="tableData"
-          border
-          style="width: 500px;margin: 0 auto">
+          style="width: 800px"
+          class="mac"
+          border>
           <el-table-column
             prop="title"
+            align="center"
+            style="text-align: center;"
             header-align="center"
-            label="分类名">
+            label="分类名"
+            width="150">
           </el-table-column>
           <el-table-column
             label="分类图标"
-            header-align="center"
-            width="100">
+            align="center"
+            header-align="center">
             <template slot-scope="scope">
-              <img style="width: 80px; height: 80px" :src="scope.row.icon"/>
+              <img style="width: 80px; height: 80px; border-radius: 8px" :src="scope.row.icon"/>
             </template>
           </el-table-column>
           <el-table-column
+            prop="countNum"
+            align="center"
+            style="text-align: center;"
             header-align="center"
+            label="新闻数量"
+            width="150">
+          </el-table-column>
+          <el-table-column
+            header-align="center"
+            align="center"
+            width="250"
             label="操作">
             <template slot-scope="scope">
               <el-button
                 size="mini"
-                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                @click="handleEdit(scope.row)">编辑</el-button>
+              <el-button
+                size="mini"
+                @click="handleEdit(scope.row)">详情</el-button>
               <el-button
                 size="mini"
                 type="danger"
@@ -43,7 +60,7 @@
           :current-page.sync="page"
           :page-sizes="[5, 10, 30]"
           layout="sizes,total, prev, pager, next"
-          :total="total">
+          :total="count">
         </el-pagination>
       </el-card>
     </div>
@@ -54,7 +71,7 @@ export default {
   data () {
     return {
       tableData: [],
-      total: 100,
+      count: 10,
       rows: 10,
       page: 1
     }
@@ -64,6 +81,7 @@ export default {
       this.$axios.get(`/category/?page=${this.page}&rows=${this.rows}`).then(res => {
         console.log(res)
         this.tableData = res.data.data
+        this.count = res.data.count
       })
     },
     handleSizeChange (val) {
@@ -75,6 +93,9 @@ export default {
       console.log(`当前页: ${val}`)
       this.page = val
       this.getDate()
+    },
+    handleEdit (row) {
+      this.$router.push({name: 'updateCategory', params: {id: row._id}})
     }
   },
   created () {
@@ -84,5 +105,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

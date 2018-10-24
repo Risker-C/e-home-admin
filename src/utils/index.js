@@ -1,7 +1,7 @@
 import axios from 'axios'
 import router from '../router'
 import { message } from 'element-ui'
-const baseURL = '/api'
+const baseURL = '/admin'
 
 const Instance = axios.create({
   baseURL,

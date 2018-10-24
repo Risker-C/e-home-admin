@@ -32,7 +32,6 @@
         <el-menu-item-group>
           <el-menu-item index="/layout/categoryList">分类列表</el-menu-item>
           <el-menu-item index="/layout/addCategory">添加分类</el-menu-item>
-          <el-menu-item index="/layout/updateCategory">修改分类</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
