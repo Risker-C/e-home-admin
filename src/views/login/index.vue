@@ -34,6 +34,7 @@ export default {
       this.$axios.post('/adminUser/login', this.formData).then(res => {
         if (res.data.code === 200) {
           this.$message.success(res.data.msg)
+          this.$store.commit('login', res.data.data)
           setTimeout(() => {
             this.$router.push('/layout')
           }, 500)

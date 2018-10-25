@@ -2,49 +2,57 @@
     <div>
       <el-card>
         <div slot="header">
-          <span>分类列表</span>
+          <span>轮播图列表</span>
         </div>
         <el-table
           :data="tableData"
-          style="width: 800px"
-          class="mac"
-          border>
+          border
+          style="width: 100%">
           <el-table-column
-            prop="title"
-            align="center"
-            style="text-align: center;"
+            prop="news.title"
             header-align="center"
-            label="分类名"
-            width="150">
+            align="center"
+            label="新闻名">
           </el-table-column>
           <el-table-column
-            label="分类图标"
+            prop="category.title"
+            header-align="center"
             align="center"
-            header-align="center">
+            label="新闻分类">
+          </el-table-column>
+          <el-table-column
+            prop="author.nickname"
+            label="是否展示"
+            align="center"
+            header-align="center"
+            width="180">
             <template slot-scope="scope">
-              <img style="width: 80px; height: 80px; border-radius: 8px" :src="scope.row.icon"/>
+              <span>{{scope.row.type === 1 ? '展示' : '隐藏'}}</span>
             </template>
           </el-table-column>
           <el-table-column
-            prop="countNum"
-            align="center"
-            style="text-align: center;"
+            prop="index"
             header-align="center"
-            label="新闻数量"
-            width="150">
+            align="center"
+            label="优先级">
+          </el-table-column>
+          <el-table-column
+            label="轮播图"
+            align="center"
+            header-align="center"
+            width="200">
+            <template slot-scope="scope">
+              <img style="max-width: 180px; height: 80px; border-radius: 8px" :src="scope.row.header"/>
+            </template>
           </el-table-column>
           <el-table-column
             header-align="center"
             align="center"
-            width="250"
             label="操作">
             <template slot-scope="scope">
               <el-button
                 size="mini"
                 @click="handleEdit(scope.row)">编辑</el-button>
-              <el-button
-                size="mini"
-                @click="handleEdit(scope.row)">详情</el-button>
               <el-button
                 size="mini"
                 type="danger"
@@ -71,14 +79,14 @@ export default {
   data () {
     return {
       tableData: [],
-      count: 10,
       rows: 10,
-      page: 1
+      page: 1,
+      count: 10
     }
   },
   methods: {
     getDate () {
-      this.$axios.get(`/category/?page=${this.page}&rows=${this.rows}`).then(res => {
+      this.$axios.get(`/swiper/swiperList/?page=${this.page}&rows=${this.rows}`).then(res => {
         // console.log(res)
         this.tableData = res.data.data
         this.count = res.data.count
@@ -95,7 +103,7 @@ export default {
       this.getDate()
     },
     handleEdit (row) {
-      this.$router.push({name: 'updateCategory', params: {id: row._id}})
+      this.$router.push({name: 'editSwiper', params: {id: row._id}})
     },
     handleDelete (row) {
       this.$message.info('此功能未制作')
@@ -109,4 +117,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

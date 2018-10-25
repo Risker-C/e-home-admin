@@ -6,6 +6,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import {getDate} from './utils'
+import store from './store'
 import '@/style/index.scss'
 
 Vue.config.productionTip = false
@@ -15,6 +16,7 @@ Vue.prototype.$axios = getDate
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

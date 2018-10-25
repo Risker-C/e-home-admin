@@ -53,7 +53,7 @@
               <el-button
                 size="mini"
                 type="danger"
-                @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                @click="handleDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -84,23 +84,27 @@ export default {
   methods: {
     getDate () {
       this.$axios.get(`/news/newsList/?page=${this.page}&rows=${this.rows}`).then(res => {
-        console.log(res)
+        // console.log(res)
         this.tableData = res.data.data
         this.count = res.data.count
       })
     },
     handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
+      // console.log(`每页 ${val} 条`)
       this.rows = val
       this.getDate()
     },
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
+      // console.log(`当前页: ${val}`)
       this.page = val
       this.getDate()
     },
     handleEdit (row) {
       this.$router.push({name: 'editNews', params: {id: row._id}})
+    },
+    handleDelete (row) {
+      this.$message.info('此功能未制作')
+      console.log(row)
     }
   },
   created () {

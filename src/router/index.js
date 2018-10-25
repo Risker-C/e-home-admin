@@ -9,11 +9,15 @@ const components = {
   welcome: () => import('@/views/layout/welcome'),
   adminList: () => import('@/views/adminUser/adminList'),
   addAdmin: () => import('@/views/adminUser/addAdmin'),
+  editAdmin: () => import('@/views/adminUser/editAdmin'),
   editPass: () => import('@/views/adminUser/editPass'),
   addNews: () => import('@/views/news/addNews'),
   newsList: () => import('@/views/news/newsList'),
   addCategory: () => import('@/views/category/addCategory'),
-  categoryList: () => import('@/views/category/categoryList')
+  categoryList: () => import('@/views/category/categoryList'),
+  swiperList: () => import('@/views/swiper/swiperList'),
+  addSwiper: () => import('@/views/swiper/addSwiper'),
+  topicList: () => import('@/views/topic/topicList')
 }
 
 export default new Router({
@@ -49,6 +53,14 @@ export default new Router({
           },
           name: 'addAdmin',
           component: components.addAdmin
+        },
+        {
+          path: 'editAdmin',
+          mate: {
+            title: '修改个人信息'
+          },
+          name: 'editAdmin',
+          component: components.editAdmin
         },
         {
           path: 'editPass',
@@ -105,6 +117,38 @@ export default new Router({
           },
           name: 'updateCategory',
           component: components.addCategory
+        },
+        {
+          path: 'swiperList',
+          mate: {
+            title: '轮播图列表'
+          },
+          name: 'swiperList',
+          component: components.swiperList
+        },
+        {
+          path: 'addSwiper',
+          mate: {
+            title: '添加列表'
+          },
+          name: 'addSwiper',
+          component: components.addSwiper
+        },
+        {
+          path: 'editSwiper/id=:id',
+          mate: {
+            title: '添加列表'
+          },
+          name: 'editSwiper',
+          component: components.addSwiper
+        },
+        {
+          path: 'topicList',
+          mate: {
+            title: '评论列表'
+          },
+          name: 'topicList',
+          component: components.topicList
         }
       ]
     }

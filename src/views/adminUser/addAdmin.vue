@@ -30,9 +30,9 @@
               active-text="女"
               inactive-text="男"></el-switch>
           </el-form-item>
-          <!--<el-form-item label="年龄" prop="age">-->
-            <!--<el-input type="age" v-model.number="formData.age" auto-complete="off"></el-input>-->
-          <!--</el-form-item>-->
+          <el-form-item label="年龄" prop="age">
+            <el-input-number :min="10" :max="60"  v-model.number="formData.age"/>
+          </el-form-item>
           <el-form-item label="身份证号：">
             <el-input v-model="formData.idCard"></el-input>
           </el-form-item>
@@ -51,8 +51,8 @@
               v-model="show"
               active-text="本地上传"
               inactive-text="上传链接"></el-switch>
-            <uploadImg v-model="formData.avatar" v-show="show"></uploadImg>
-            <el-input v-model="formData.avatar" v-show="!show"></el-input>
+            <uploadImg v-model="formData.header" v-show="show"></uploadImg>
+            <el-input v-model="formData.header" v-show="!show"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type='primary' @click="submitForm()" style="width: 300px">添加</el-button>
@@ -86,7 +86,7 @@ export default {
         email: '123@123.com',
         phone: '1231231231',
         idCard: 'admin2',
-        avatar: '',
+        header: 'http://img3.imgtn.bdimg.com/it/u=1153395294,1808870211&fm=26&gp=0.jpg',
         sex: 1,
         age: 10
       },
@@ -118,12 +118,12 @@ export default {
         idCard: [
           {required: true, message: '请输入身份证号', targger: 'blur'},
           {type: 'idCard', message: '请输入身份证号', targger: 'blur'}
-        ],
-        age: [
-          { required: true, message: '年龄不能为空' },
-          { type: 'number', message: '年龄必须为数字值' },
-          { min: 10, max: 60, message: '年龄必须在10到60之间' }
         ]
+        // age: [
+        //   { required: true, message: '年龄不能为空' },
+        //   { type: 'number', message: '年龄必须为数字值' },
+        //   { min: 10, max: 60, message: '年龄必须在10到60之间' }
+        // ]
       }
     }
   },
@@ -138,6 +138,9 @@ export default {
                 message: res.data.msg,
                 type: 'success'
               })
+              setTimeout(() => {
+                this.$router.push({name: 'adminList'})
+              }, 1000)
             } else {
               this.$message({
                 message: res.data.msg,

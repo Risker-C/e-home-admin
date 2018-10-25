@@ -54,13 +54,13 @@
             align="center"
             label="操作">
             <template slot-scope="scope">
-              <el-button
-                size="mini"
-                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              <!--<el-button-->
+                <!--size="mini"-->
+                <!--@click="handleEdit(scope.$index, scope.row)">编辑</el-button>-->
               <el-button
                 size="mini"
                 type="danger"
-                @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                @click="handleDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -91,20 +91,24 @@ export default {
   methods: {
     getDate () {
       this.$axios.get(`/adminUser/?page=${this.page}&rows=${this.rows}`).then(res => {
-        console.log(res)
+        // console.log(res)
         this.tableData = res.data.data
         this.count = res.data.count
       })
     },
     handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
+      // console.log(`每页 ${val} 条`)
       this.rows = val
       this.getDate()
     },
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
+      // console.log(`当前页: ${val}`)
       this.page = val
       this.getDate()
+    },
+    handleDelete (row) {
+      this.$message.info('此功能未制作')
+      console.log(row)
     }
   },
   created () {
