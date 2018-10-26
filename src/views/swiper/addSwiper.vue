@@ -199,6 +199,7 @@ export default {
         this.formData._id = id
         this.isEdit = true
       } else {
+        this.isEdit = false
         this.formData = {
           _id: '',
           news: '',

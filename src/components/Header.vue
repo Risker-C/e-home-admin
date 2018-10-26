@@ -6,8 +6,10 @@
     </el-breadcrumb>
     党建e家后台管理
     <el-dropdown @command="handleCommand" class="flr" style="line-height: 50px; margin-top: 5px">
+      <span class="el-dropdown-link">
     <img class="el-dropdown-link userImg" :src="this.$store.state.userInfo.header"/>
-        <el-dropdown-menu slot="dropdown" style="margin-top: 10px">
+      </span>
+        <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="editAdmin">修改个人信息</el-dropdown-item>
           <el-dropdown-item command="editPass">修改密码</el-dropdown-item>
           <el-dropdown-item command="logout">退出登录</el-dropdown-item>
