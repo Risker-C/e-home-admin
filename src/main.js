@@ -8,6 +8,7 @@ import router from './router'
 import {getDate} from './utils'
 import store from './store'
 import '@/style/index.scss'
+import 'normalize.css/normalize.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
